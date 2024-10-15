@@ -25,14 +25,16 @@ from PySide6.QtWidgets import (
     QComboBox
 )
 Mem1 = 0
-class Color(QWidget):
 
+
+class Color(QWidget):
     def __init__(self, color):
         super(Color, self).__init__()
         self.setAutoFillBackground(True)
         palette = self.palette()
         palette.setColor(QPalette.Window, QColor(color))
         self.setPalette(palette)
+
 
 class CustomQPushButton(QPushButton):
     def __init__(self, text, parent, if_eng:bool=False):
@@ -295,6 +297,8 @@ class CustomQPushButton(QPushButton):
                             self.alone_sign.setText("0")
 # //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         return super().keyPressEvent(e_1)
+    
+
     def mousePressEvent(self, e: QMouseEvent) -> None:
         global Mem1
         if self.text() == 'C' or self.text() == 'CE':
@@ -526,8 +530,6 @@ class CustomQPushButton(QPushButton):
                 pass
             else:
                 self.alone_sign.setText(self.alone_sign.text() + self.text())
-        # TODO добавитьь коменты
-
         elif self.text() == "+/-":
             if "=" in self.alone_sign.text() or "^" in self.alone_sign.text():
                 pass
@@ -633,34 +635,33 @@ class CustomQPushButton(QPushButton):
 
         return super().mousePressEvent(e)
 
+
 class ClickableLabel(QLabel):
     def __init__(self, text="", parent=None):
         super().__init__(text, parent)
+
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
             clipboard = QGuiApplication.clipboard()
             clipboard.setText(self.text())
             print("Скопированно:", self.text())
+
+
 class MainWindow(QMainWindow):  
     def __init__(self):
         super(MainWindow, self).__init__()
         self.setFixedSize(QSize(550, 300))
         self.setWindowTitle("кальклюкатор")
-        
         self.full_formula = ClickableLabel()
         self.full_formula.setFixedWidth(450)
         self.full_formula.setAlignment(Qt.AlignRight)
         self.alone_sign = ClickableLabel()
         self.alone_sign.setAlignment(Qt.AlignRight)
         self.alone_sign.setFixedWidth(450)
-       
-        
         #main widget
         main_widget = QWidget()
         main_widget.setLayout(QVBoxLayout())
-
-
         #labels
         labels_frame = QFrame()
         labels_frame.setLineWidth(3)
@@ -673,9 +674,7 @@ class MainWindow(QMainWindow):
         labels_frame.setSizePolicy(QSizePolicy.Policy.Expanding, \
                                    QSizePolicy.Policy.Fixed)
         main_widget.layout().addWidget(labels_frame)
-
         labels_frame = QFrame()
-
         layout_butt = QGridLayout()
         layout_butt.addWidget(CustomQPushButton("log", self, True), 0, 0)
         layout_butt.addWidget(CustomQPushButton("ln", self,True), 1, 0)
@@ -720,10 +719,8 @@ class MainWindow(QMainWindow):
         layout_butt.addWidget(CustomQPushButton("MS", self), 3, 5)
         layout_butt.addWidget(CustomQPushButton("M+", self), 4, 5)
         layout_butt.addWidget(CustomQPushButton("M-", self), 5, 5)
-
         main_widget.layout().addLayout(layout_butt)
         self.setCentralWidget(main_widget)
-    
             
 
 if __name__ == "__main__":
