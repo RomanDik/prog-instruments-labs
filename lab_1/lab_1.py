@@ -5,7 +5,13 @@ from random import choice, randint
 # Сторонние библиотеки
 from sympy import ln, log, sin, cos, pi, tan, cot
 from PySide6.QtCore import Qt, QEvent, QSize
-from PySide6.QtGui import QKeyEvent, QMouseEvent, QPalette, QColor, QGuiApplication
+from PySide6.QtGui import (
+    QKeyEvent, 
+    QMouseEvent, 
+    QPalette, 
+    QColor, 
+    QGuiApplication
+)
 from PySide6.QtWidgets import (
     QApplication,
     QLabel,
@@ -32,7 +38,8 @@ class CustomQPushButton(QPushButton):
     def __init__(self, text, parent, if_eng:bool=False):
         super().__init__(text, parent=parent)
         self.setMouseTracking(True)
-        self.setSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.MinimumExpanding)
+        self.setSizePolicy(QSizePolicy.Policy.MinimumExpanding, \
+                           QSizePolicy.Policy.MinimumExpanding)
         self.full_formula = self.parent().full_formula
         self.alone_sign = self.parent().alone_sign
         self.full_formula.setText("0")
@@ -110,13 +117,16 @@ class CustomQPushButton(QPushButton):
                     if self.full_formula.text() == "0":
                         self.full_formula.clear()
                     if len(self.full_formula.text()) < 1:
-                        self.full_formula.setText(self.full_formula.text() + self.alone_sign.text() + "+")
+                        self.full_formula.setText(self.full_formula.text()\
+                                                +self.alone_sign.text() + "+")
                         self.alone_sign.setText("0")
                     elif  self.full_formula.text()[-1] == "0":
-                        self.full_formula.setText(self.full_formula.text() + "+")
+                        self.full_formula.setText(self.full_formula.text()\
+                                                + "+")
                         self.alone_sign.setText("0")
                     else:
-                        self.full_formula.setText(self.full_formula.text() + self.alone_sign.text() + "+")
+                        self.full_formula.setText(self.full_formula.text()\
+                                                +self.alone_sign.text() + "+")
                         self.alone_sign.setText("0")
 # //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             case Qt.Key_Minus:
@@ -129,13 +139,16 @@ class CustomQPushButton(QPushButton):
                         self.full_formula.clear()
 
                     if len(self.full_formula.text()) < 1:
-                        self.full_formula.setText(self.full_formula.text() + self.alone_sign.text() + "-")
+                        self.full_formula.setText(self.full_formula.text()\
+                                                +self.alone_sign.text() + "-")
                         self.alone_sign.setText("0")
                     elif  self.full_formula.text()[-1] == "0":
-                        self.full_formula.setText(self.full_formula.text() + "-")
+                        self.full_formula.setText(self.full_formula.text()\
+                                                +"-")
                         self.alone_sign.setText("0")
                     else:
-                        self.full_formula.setText(self.full_formula.text() + self.alone_sign.text() + "-")
+                        self.full_formula.setText(self.full_formula.text()\
+                                                +self.alone_sign.text() + "-")
                         self.alone_sign.setText("0")
 # /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             case Qt.Key_Asterisk:
@@ -148,13 +161,16 @@ class CustomQPushButton(QPushButton):
                         self.full_formula.clear()
 
                     if len(self.full_formula.text()) < 1:
-                        self.full_formula.setText(self.full_formula.text() + self.alone_sign.text() + "*")
+                        self.full_formula.setText(self.full_formula.text()\
+                                                +self.alone_sign.text() + "*")
                         self.alone_sign.setText("0")
                     elif  self.full_formula.text()[-1] == "0":
-                        self.full_formula.setText(self.full_formula.text() + "*")
+                        self.full_formula.setText(self.full_formula.text()\
+                                                +"*")
                         self.alone_sign.setText("0")
                     else:
-                        self.full_formula.setText(self.full_formula.text() + self.alone_sign.text() + "*")
+                        self.full_formula.setText(self.full_formula.text()\
+                                                +self.alone_sign.text() + "*")
                         self.alone_sign.setText("0")
 # ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             case Qt.Key_Slash:
@@ -166,13 +182,16 @@ class CustomQPushButton(QPushButton):
                     if self.full_formula.text() == "0":
                         self.full_formula.clear()
                     if len(self.full_formula.text()) < 1:
-                        self.full_formula.setText(self.full_formula.text() + self.alone_sign.text() + "/")
+                        self.full_formula.setText(self.full_formula.text()\
+                                                +self.alone_sign.text() + "/")
                         self.alone_sign.setText("0")
                     elif  self.full_formula.text()[-1] == "0":
-                        self.full_formula.setText(self.full_formula.text() + "/")
+                        self.full_formula.setText(self.full_formula.text()\
+                                                +"/")
                         self.alone_sign.setText("0")
                     else:
-                        self.full_formula.setText(self.full_formula.text() + self.alone_sign.text() + "/")
+                        self.full_formula.setText(self.full_formula.text()\
+                                                +self.alone_sign.text() + "/")
                         self.alone_sign.setText("0")
 # ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             case Qt.Key_Equal: 
@@ -180,47 +199,67 @@ class CustomQPushButton(QPushButton):
                     self.alone_sign.setText(self.alone_sign.text() + "0")
                 if self.full_formula.text() == "0":
                     self.full_formula.clear()
-                if "=" in self.alone_sign.text() and ("+" in self.full_formula.text() or "-" in self.full_formula.text() or "*" in self.full_formula.text() or "/" in self.full_formula.text()):
+                if "=" in self.alone_sign.text() and \
+                    ("+" in self.full_formula.text() \
+                    or "-" in self.full_formula.text() \
+                    or "*" in self.full_formula.text() or \
+                    "/" in self.full_formula.text()):
                     time_alone = ""
                     fin = 0
                     i = len(self.full_formula.text()) - 1
                     while fin == 0:
-                        if self.full_formula.text()[i] == "+" or self.full_formula.text()[i] == "-" or self.full_formula.text()[i] == "*" or self.full_formula.text()[i] == "/":
+                        if self.full_formula.text()[i] == "+" or \
+                            self.full_formula.text()[i] == "-" or \
+                            self.full_formula.text()[i] == "*" or \
+                            self.full_formula.text()[i] == "/":
                             if self.full_formula.text()[i] == "*":
-                                time_alone = self.full_formula.text()[i]+ "*" + time_alone
+                                time_alone = self.full_formula.text()[i]+\
+                                    "*" + time_alone
                             else: 
-                                time_alone = self.full_formula.text()[i] + time_alone
+                                time_alone = self.full_formula.text()[i]+\
+                                    time_alone
                             fin = 1
                         else:
-                           time_alone = self.full_formula.text()[i] + time_alone
-                           i -= 1
+                            time_alone = self.full_formula.text()[i]\
+                            + time_alone
+                            i -= 1
                     time_full = str(self.alone_sign.text())
                     time_full = time_full[1:]
                     time_full = time_full + time_alone
                     self.full_formula.setText(time_full)
-                    self.alone_sign.setText("=" + str(eval(self.full_formula.text())))
+                    self.alone_sign.setText("=" + \
+                                        str(eval(self.full_formula.text())))
                 elif "=" in self.alone_sign.text():
                     pass
                 elif len(self.alone_sign.text()) > 0:
                     if not self.alone_sign.text() == "0":
-                        self.full_formula.setText(self.full_formula.text() + self.alone_sign.text())
-                        if str(eval(self.full_formula.text()))[-1] == "0" and  str(eval(self.full_formula.text()))[-2] == ".":
-                            self.alone_sign.setText("=" + str(int(eval(self.full_formula.text()))))
+                        self.full_formula.setText(self.full_formula.text() + \
+                                                  self.alone_sign.text())
+                        if str(eval(self.full_formula.text()))[-1] == "0" and \
+                                str(eval(self.full_formula.text()))[-2] == ".":
+                            self.alone_sign.setText(\
+                                "=" + str(int(eval(self.full_formula.text()))))
                         else:
-                            self.alone_sign.setText("=" + str(eval(self.full_formula.text())))
+                            self.alone_sign.setText(\
+                                "=" + str(eval(self.full_formula.text())))
                 else:
-                    if str(self.full_formula.text()[-1]).isdigit() or str(self.alone_sign.text()[-1]).isdigit():
-                        self.full_formula.setText(self.full_formula.text() + self.alone_sign.text())
-                        self.alone_sign.setText("=" + str(eval(self.full_formula.text())))
+                    if str(self.full_formula.text()[-1]).isdigit() or \
+                        str(self.alone_sign.text()[-1]).isdigit():
+                        self.full_formula.setText(self.full_formula.text() + \
+                                                  self.alone_sign.text())
+                        self.alone_sign.setText(\
+                            "=" + str(eval(self.full_formula.text())))
 # ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             case Qt.Key_Period:
                 if len(self.alone_sign.text()) == 0:	
                     self.alone_sign.setText("0")
                 if not "." in self.alone_sign.text():
                     if not self.alone_sign.text()[-1].isdigit():
-                        self.alone_sign.setText(self.alone_sign.text() + "0" + ".")
+                        self.alone_sign.setText(self.alone_sign.text()\
+                                                 + "0" + ".")
                     else:
-                        self.alone_sign.setText(self.alone_sign.text() + ".")
+                        self.alone_sign.setText(self.alone_sign.text()\
+                                                 + ".")
 # ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             case Qt.Key_Backspace:
                 if len(self.alone_sign.text()) > 1: 
@@ -246,10 +285,13 @@ class CustomQPushButton(QPushButton):
                         self.full_formula.clear()
                     if not self.alone_sign.text()[-1] == "0":
                         if self.full_formula.text()[-1] == "0":
-                            self.full_formula.setText(self.full_formula.text() + "/")
+                            self.full_formula.setText(\
+                                self.full_formula.text() + "/")
                             self.alone_sign.setText("0")
                         else:
-                            self.full_formula.setText(self.full_formula.text() + self.alone_sign.text() + "/")
+                            self.full_formula.setText(\
+                                self.full_formula.text() +\
+                                self.alone_sign.text() + "/")
                             self.alone_sign.setText("0")
 # //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         return super().keyPressEvent(e_1)
@@ -258,7 +300,8 @@ class CustomQPushButton(QPushButton):
         if self.text() == 'C' or self.text() == 'CE':
                 pass
         else:
-            if len(str(self.full_formula.text())) > 65 or len(str(self.alone_sign.text())) > 65:
+            if len(str(self.full_formula.text())) > 65 or \
+                len(str(self.alone_sign.text())) > 65:
                 return 0    
         if self.text() == 'C':
                 self.alone_sign.setText("0")
@@ -275,7 +318,8 @@ class CustomQPushButton(QPushButton):
             
             Mem1 = 0
         elif self.text() == "MR": 
-            if not self.full_formula.text()[-1].isdigit() or self.full_formula.text() == '0':
+            if not self.full_formula.text()[-1].isdigit() or \
+                self.full_formula.text() == '0':
                 self.alone_sign.setText(str(Mem1))
         elif self.text() == "MS": 
             
@@ -296,11 +340,14 @@ class CustomQPushButton(QPushButton):
             else:
                 Mem1 -=  float(self.alone_sign.text())
 # //////////////////////////////////////////////////////////////////////////////
-        elif self.text() == "sqrt" and not "log" in self.alone_sign.text() and not "%" in self.alone_sign.text():
+        elif self.text() == "sqrt" and not "log" in \
+            self.alone_sign.text() and not "%" in self.alone_sign.text():
             if (not ("=" in self.alone_sign.text())):
                 self.alone_sign.setText(str(sqrt(float(self.alone_sign.text()))))
         elif self.text() == "log" or self.text() == "ln":
-            if not ("=" in self.alone_sign.text()) and not ("log" in self.alone_sign.text()) and not ("%" in self.alone_sign.text()):
+            if not ("=" in self.alone_sign.text()) and \
+                not ("log" in self.alone_sign.text()) and \
+                not ("%" in self.alone_sign.text()):
                 if self.text() == "log":
                     self.alone_sign.setText(self.alone_sign.text() + "log")
                 if self.text() == "ln":
@@ -337,27 +384,40 @@ class CustomQPushButton(QPushButton):
                     if right == "0" or down == "0":
                         if self.full_formula.text() == "0":
                             self.full_formula.clear()
-                        self.full_formula.setText(self.full_formula.text() + "0")
-                        self.alone_sign.setText("=" + str(eval(self.full_formula.text())))
+                        self.full_formula.setText(self.full_formula.text()\
+                                                   + "0")
+                        self.alone_sign.setText(\
+                            "=" + str(eval(self.full_formula.text())))
                     elif self.text() == '=':
                         if self.full_formula.text() == "0":
                             self.full_formula.clear()
-                        self.full_formula.setText(self.full_formula.text() + str(log(float(down),float(right))))
-                        self.alone_sign.setText("=" + str(eval(self.full_formula.text())))
+                        self.full_formula.setText(\
+                            self.full_formula.text() + \
+                            str(log(float(down),float(right))))
+                        self.alone_sign.setText(\
+                            "=" + str(eval(self.full_formula.text())))
                     elif self.text() == 'sqrt':
                         if self.full_formula.text() == "0":
                             self.full_formula.clear()
-                        self.full_formula.setText(self.full_formula.text() + str(sqrt(log(float(down),float(right)))))
-                        self.alone_sign.setText("=" + str(eval(self.full_formula.text())))
+                        self.full_formula.setText(\
+                            self.full_formula.text() + \
+                                str(sqrt(log(float(down),float(right)))))
+                        self.alone_sign.setText(\
+                            "=" + str(eval(self.full_formula.text())))
                     elif self.text() == 'x^y':
                         if self.full_formula.text() == "0":
                             self.full_formula.clear()
-                        self.full_formula.setText(self.full_formula.text() + str(log(float(down),float(right))) + "**")
+                        self.full_formula.setText(\
+                            self.full_formula.text() + \
+                            str(log(float(down),float(right))) + "**")
                         self.alone_sign.setText("0")
                     else: 
                         if self.full_formula.text() == "0":
                             self.full_formula.clear()
-                        self.full_formula.setText(self.full_formula.text() + str(log(float(down),float(right))) + self.text())
+                        self.full_formula.setText(\
+                            self.full_formula.text() + \
+                            str(log(float(down),float(right))) + \
+                            self.text())
                         self.alone_sign.setText("0")
         elif self.text() == "%":
             if self.alone_sign.text().isdigit():
@@ -366,7 +426,10 @@ class CustomQPushButton(QPushButton):
             if str(self.text()).isdigit():
                 self.alone_sign.setText(self.alone_sign.text() + self.text())
             else:
-                if self.text() == '=' or self.text() == '+' or self.text() == '-' or self.text() == '*' or self.text() == '/' or self.text() == "x^y" or self.text() == "sqrt":
+                if self.text() == '=' or self.text() == '+' or \
+                    self.text() == '-' or self.text() == '*' or \
+                    self.text() == '/' or self.text() == "x^y" or \
+                    self.text() == "sqrt":
                     j1 = 0
                     final1 = 0
                     right1=""
@@ -388,53 +451,74 @@ class CustomQPushButton(QPushButton):
                     if right1 == "0" or down1 == "0":
                         if self.full_formula.text() == "0":
                             self.full_formula.clear()
-                        self.full_formula.setText(self.full_formula.text() + "0")
-                        self.alone_sign.setText("=" + str(eval(self.full_formula.text())))
+                        self.full_formula.setText(\
+                            self.full_formula.text() + "0")
+                        self.alone_sign.setText(\
+                            "=" + str(eval(self.full_formula.text())))
                     elif self.text() == '=':
                         if self.full_formula.text() == "0":
                             self.full_formula.clear()
-                        self.full_formula.setText(self.full_formula.text() + str(float(down1)/100*float(right1)))
-                        self.alone_sign.setText("=" + str(eval(self.full_formula.text())))
+                        self.full_formula.setText(\
+                            self.full_formula.text() + \
+                            str(float(down1)/100*float(right1)))
+                        self.alone_sign.setText(\
+                            "=" + str(eval(self.full_formula.text())))
                     elif self.text() == 'sqrt':
                         if self.full_formula.text() == "0":
                             self.full_formula.clear()
-                        self.full_formula.setText(self.full_formula.text() + str(sqrt(float(down1)/100*float(right1))))
-                        self.alone_sign.setText("=" + str(eval(self.full_formula.text())))
+                        self.full_formula.setText(\
+                            self.full_formula.text() + \
+                            str(sqrt(float(down1)/100*float(right1))))
+                        self.alone_sign.setText(\
+                            "=" + str(eval(self.full_formula.text())))
                     elif self.text() == 'x^y':
                         if self.full_formula.text() == "0":
                             self.full_formula.clear()
-                        self.full_formula.setText(self.full_formula.text() + str(float(down1)/100*float(right1)) + "**")
+                        self.full_formula.setText(\
+                            self.full_formula.text() + \
+                            str(float(down1)/100*float(right1)) + "**")
                         self.alone_sign.setText("0")
                     else: 
                         if self.full_formula.text() == "0":
                             self.full_formula.clear()
-                        self.full_formula.setText(self.full_formula.text() + str(float(down1)/100*float(right1)) + self.text())
+                        self.full_formula.setText(\
+                            self.full_formula.text() + \
+                            str(float(down1)/100*float(right1)) + self.text())
                         self.alone_sign.setText("0")
 
-        elif self.text() == "sin" or self.text() == "cos" or self.text() == "tan" or self.text() == "cot":
+        elif self.text() == "sin" or self.text() == "cos" or \
+            self.text() == "tan" or self.text() == "cot":
             if not ("=" in self.alone_sign.text()):
                 x = float(self.alone_sign.text())  
                 self.alone_sign.clear()
                 if self.text() == "sin":
                     if x==0:
-                        self.alone_sign.setText(self.alone_sign.text() + "1")
+                        self.alone_sign.setText(\
+                        self.alone_sign.text() + "1")
                     else:
-                        self.alone_sign.setText(self.alone_sign.text() + str((float(sin(pi/(180/x))))))
+                        self.alone_sign.setText(\
+                        self.alone_sign.text() + str((float(sin(pi/(180/x))))))
                 if self.text() == "cos":
                     if x==0:
                         self.alone_sign.setText(self.alone_sign.text() + "0")
                     else:
-                        self.alone_sign.setText(self.alone_sign.text() + str((float(cos(pi/(180/x))))))
+                        self.alone_sign.setText(\
+                        self.alone_sign.text() + str((float(cos(pi/(180/x))))))
                 if self.text() == "tan":
                     if not (x%90 == 0 and x%180>0):
                         if x==0:
-                            self.alone_sign.setText(self.alone_sign.text() + "0")
+                            self.alone_sign.setText(\
+                            self.alone_sign.text() + "0")
                         else:
-                            self.alone_sign.setText(self.alone_sign.text() + str((float(tan(pi/(180/x))))))
+                            self.alone_sign.setText(\
+                            self.alone_sign.text() + \
+                            str((float(tan(pi/(180/x))))))
                 if self.text() == "cot":
                     if not (x%180 == 0):
                         if not (x == 0) :
-                            self.alone_sign.setText(self.alone_sign.text() + str((float(cot(pi/(180/x))))))
+                            self.alone_sign.setText(\
+                                self.alone_sign.text() + \
+                                str((float(cot(pi/(180/x))))))
                 if self.alone_sign.text() == "":
                     self.alone_sign.setText("0")
         elif self.text() == ".":
@@ -455,64 +539,96 @@ class CustomQPushButton(QPushButton):
                     self.alone_sign.setText("-" + self.alone_sign.text())
 
         elif str(self.text()).isdigit():
-                if "=" in self.alone_sign.text() or (str(self.full_formula.text()[-1]).isdigit() and len(self.full_formula.text())>1):
+                if "=" in self.alone_sign.text() or \
+                    (str(self.full_formula.text()[-1]).isdigit() and \
+                    len(self.full_formula.text())>1):
                     pass
                 else:
-                    if self.alone_sign.text() == "0" or self.alone_sign.text() == "-0":
+                    if self.alone_sign.text() == "0" or \
+                        self.alone_sign.text() == "-0":
                         self.alone_sign.clear()
-                    self.alone_sign.setText(self.alone_sign.text() + self.text())
+                    self.alone_sign.setText(self.alone_sign.text() + \
+                                            self.text())
         else:
-            if not self.text() == 'Инжинерный' and not self.text() == 'Обычный': 
+            if not self.text() == 'Инжинерный' and \
+                not self.text() == 'Обычный': 
                 
                 if self.text() == '=':
                     if self.alone_sign.text()[-1] == ".":
                         self.alone_sign.setText(self.alone_sign.text() + "0")
                     if self.full_formula.text() == "0":
                         self.full_formula.clear()
-                    if "=" in self.alone_sign.text() and ("+" in self.full_formula.text() or "-" in self.full_formula.text() or "*" in self.full_formula.text() or "/" in self.full_formula.text()):
+                    if "=" in self.alone_sign.text() and \
+                        ("+" in self.full_formula.text() or \
+                         "-" in self.full_formula.text() or \
+                        "*" in self.full_formula.text() or \
+                        "/" in self.full_formula.text()):
                         time_alone = ""
                         fin = 0
                         i = len(self.full_formula.text()) - 1
                         while fin == 0:
-                            if self.full_formula.text()[i] == "+" or self.full_formula.text()[i] == "-" or self.full_formula.text()[i] == "*" or self.full_formula.text()[i] == "/":
-                                if self.full_formula.text()[i] == "*" and self.full_formula.text()[i-1] == "*":
-                                    time_alone = self.full_formula.text()[i] + "*" + time_alone 
+                            if self.full_formula.text()[i] == "+" or \
+                                self.full_formula.text()[i] == "-" or \
+                                self.full_formula.text()[i] == "*" or \
+                                self.full_formula.text()[i] == "/":
+                                if self.full_formula.text()[i] == "*" and \
+                                    self.full_formula.text()[i-1] == "*":
+                                    time_alone = self.full_formula.text()[i]\
+                                        + "*" + time_alone 
                                 else: 
-                                    time_alone = self.full_formula.text()[i] + time_alone
+                                    time_alone = self.full_formula.text()[i]\
+                                        + time_alone
                                 fin = 1
                             else:
-                                time_alone = self.full_formula.text()[i] + time_alone
+                                time_alone = self.full_formula.text()[i]\
+                                    + time_alone
                                 i -= 1
                         time_full = str(self.alone_sign.text())
                         time_full = time_full[1:]
                         time_full = time_full + time_alone
                         self.full_formula.setText(time_full)
-                        self.alone_sign.setText("=" + str(eval(self.full_formula.text())))
+                        self.alone_sign.setText(\
+                            "=" + str(eval(self.full_formula.text())))
                     elif "=" in self.alone_sign.text():
                         pass
                     elif len(self.alone_sign.text()) > 0:
                         if not self.alone_sign.text() == "0":
-                            self.full_formula.setText(self.full_formula.text() + self.alone_sign.text())
-                            if str(eval(self.full_formula.text()))[-1] == "0" and  str(eval(self.full_formula.text()))[-2] == ".":
-                                self.alone_sign.setText("=" + str(int(eval(self.full_formula.text()))))
+                            self.full_formula.setText(\
+                                self.full_formula.text() + \
+                                self.alone_sign.text())
+                            if str(eval(\
+                                self.full_formula.text()))[-1] == "0" and \
+                                str(eval(self.full_formula.text()))[-2] == ".":
+                                self.alone_sign.setText(\
+                                "=" + str(int(eval(self.full_formula.text()))))
                             else:
-                                self.alone_sign.setText("=" + str(eval(self.full_formula.text())))
+                                self.alone_sign.setText(\
+                                "=" + str(eval(self.full_formula.text())))
                     else:
-                        if str(self.full_formula.text()[-1]).isdigit() or str(self.alone_sign.text()[-1]).isdigit():
-                            self.full_formula.setText(self.full_formula.text() + self.alone_sign.text())
-                            self.alone_sign.setText("=" + str(eval(self.full_formula.text())))
+                        if str(self.full_formula.text()[-1]).isdigit() or \
+                            str(self.alone_sign.text()[-1]).isdigit():
+                            self.full_formula.setText(\
+                                self.full_formula.text() + \
+                                self.alone_sign.text())
+                            self.alone_sign.setText(\
+                            "=" + str(eval(self.full_formula.text())))
                 else:
                         if self.alone_sign.text()[-1] == ".":
-                            self.alone_sign.setText(self.alone_sign.text() + "0")
+                            self.alone_sign.setText(\
+                            self.alone_sign.text() + "0")
                         if "=" in self.alone_sign.text():
                             self.alone_sign.clear()
                         if self.full_formula.text() == "0":
                             self.full_formula.clear()
                         if self.text() == "x^y":
-                            self.full_formula.setText(self.full_formula.text() + self.alone_sign.text() + "**")
+                            self.full_formula.setText(\
+                            self.full_formula.text() + \
+                            self.alone_sign.text() + "**")
                             self.alone_sign.setText("0")
                         else: 
-                            self.full_formula.setText(self.full_formula.text() + self.alone_sign.text() + self.text())
+                            self.full_formula.setText(\
+                            self.full_formula.text() + \
+                            self.alone_sign.text() + self.text())
                             self.alone_sign.setText("0")
 
         return super().mousePressEvent(e)
@@ -550,9 +666,12 @@ class MainWindow(QMainWindow):
         labels_frame.setLineWidth(3)
         labels_frame.setFrameStyle(QFrame.WinPanel | QFrame.Plain)
         labels_frame.setLayout(QVBoxLayout())
-        labels_frame.layout().addWidget(self.full_formula, alignment=Qt.AlignmentFlag.AlignRight)
-        labels_frame.layout().addWidget(self.alone_sign, alignment=Qt.AlignmentFlag.AlignRight)
-        labels_frame.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+        labels_frame.layout().addWidget(self.full_formula, \
+                                        alignment=Qt.AlignmentFlag.AlignRight)
+        labels_frame.layout().addWidget(self.alone_sign, \
+                                        alignment=Qt.AlignmentFlag.AlignRight)
+        labels_frame.setSizePolicy(QSizePolicy.Policy.Expanding, \
+                                   QSizePolicy.Policy.Fixed)
         main_widget.layout().addWidget(labels_frame)
 
         labels_frame = QFrame()
@@ -589,8 +708,11 @@ class MainWindow(QMainWindow):
         layout_butt.addWidget(CustomQPushButton("+", self), 4, 4)
         layout_butt.addWidget(CustomQPushButton("=", self), 5, 4)
         switcher = CustomQPushButton("Инжинерный", self)
-        switcher.clicked.connect(lambda: [button.eng_toggle(switcher) for button in self.findChildren(CustomQPushButton)])
-        switcher.clicked.connect(lambda: switcher.setText('Обычный') if switcher.text() == "Инжинерный" else\
+        switcher.clicked.connect(lambda: [\
+            button.eng_toggle(switcher) for button\
+                in self.findChildren(CustomQPushButton)])
+        switcher.clicked.connect(lambda: switcher.setText('Обычный')\
+                                if switcher.text() == "Инжинерный" else\
                                  switcher.setText("Инжинерный"))
         layout_butt.addWidget(switcher, 0, 5)
         layout_butt.addWidget(CustomQPushButton("MC", self), 1, 5)
