@@ -57,7 +57,7 @@ class CustomQPushButton(QPushButton):
             self.show()
 
 
-    def keyPressEvent(self, e_1: QKeyEvent) -> None:
+    def key_Press_Event(self, e_1: QKeyEvent) -> None:
         match e_1.key():
             case Qt.Key_1:
                 if self.alone_sign.text() == "0":
@@ -299,7 +299,7 @@ class CustomQPushButton(QPushButton):
         return super().keyPressEvent(e_1)
     
 
-    def mousePressEvent(self, e: QMouseEvent) -> None:
+    def mouse_Press_Event(self, e: QMouseEvent) -> None:
         global Mem1
         if self.text() == 'C' or self.text() == 'CE':
                 pass
@@ -319,26 +319,22 @@ class CustomQPushButton(QPushButton):
                 self.alone_sign.setText(str(Mem1))
                 Mem1 = 0
         elif self.text() == "MC": 
-            
             Mem1 = 0
         elif self.text() == "MR": 
             if not self.full_formula.text()[-1].isdigit() or \
                 self.full_formula.text() == '0':
                 self.alone_sign.setText(str(Mem1))
         elif self.text() == "MS": 
-            
             if "=" in self.alone_sign.text():
                 Mem1  = float(self.alone_sign.text()[1:])
             else:
                 Mem1  = float(self.alone_sign.text())
         elif self.text() == "M+": 
-            
             if "=" in self.alone_sign.text():
                 self.Mem +=  float(self.alone_sign.text()[1:])
             else:
                 Mem1 +=  float(self.alone_sign.text())   
         elif self.text() == "M-": 
-           
             if "=" in self.alone_sign.text():
                 Mem1 -=  float(self.alone_sign.text()[1:])
             else:
@@ -632,7 +628,6 @@ class CustomQPushButton(QPushButton):
                             self.full_formula.text() + \
                             self.alone_sign.text() + self.text())
                             self.alone_sign.setText("0")
-
         return super().mousePressEvent(e)
 
 
@@ -641,7 +636,7 @@ class ClickableLabel(QLabel):
         super().__init__(text, parent)
 
 
-    def mousePressEvent(self, event):
+    def mouse_Press_Event(self, event):
         if event.button() == Qt.LeftButton:
             clipboard = QGuiApplication.clipboard()
             clipboard.setText(self.text())
