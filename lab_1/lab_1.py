@@ -1,10 +1,9 @@
 # Стандартные библиотеки
 from math import sqrt
-from random import choice, randint
 
 # Сторонние библиотеки
 from sympy import ln, log, sin, cos, pi, tan, cot
-from PySide6.QtCore import Qt, QEvent, QSize
+from PySide6.QtCore import Qt, QSize
 from PySide6.QtGui import (
     QKeyEvent, 
     QMouseEvent, 
@@ -21,8 +20,7 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QWidget,
     QGridLayout,
-    QFrame,
-    QComboBox
+    QFrame
 )
 Mem1 = 0
 
@@ -46,7 +44,9 @@ class CustomQPushButton(QPushButton):
         self.alone_sign = self.parent().alone_sign
         self.full_formula.setText("0")
         self.alone_sign.setText("0")
-        self.is_eng = if_eng  # указатель, что кнопка является частью инженерного режима
+# указатель, что кнопка является частью инженерного режима
+        self.is_eng = if_eng  
+
         
     
     def eng_toggle(self, switcher=None):
@@ -654,10 +654,10 @@ class MainWindow(QMainWindow):
         self.alone_sign = ClickableLabel()
         self.alone_sign.setAlignment(Qt.AlignRight)
         self.alone_sign.setFixedWidth(450)
-        #main widget
+#main widget
         main_widget = QWidget()
         main_widget.setLayout(QVBoxLayout())
-        #labels
+#labels
         labels_frame = QFrame()
         labels_frame.setLineWidth(3)
         labels_frame.setFrameStyle(QFrame.WinPanel | QFrame.Plain)
