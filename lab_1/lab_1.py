@@ -1,16 +1,11 @@
-from sympy import *
+# Стандартные библиотеки
 from math import sqrt
-# для начала в терминале ввести .\.venv\Scripts\python.exe .\main.py
 from random import choice, randint
-# from layout_colorwidget import Color
-from PySide6.QtCore import Qt,QEvent,QSize
-from PySide6.QtGui import (
-    QKeyEvent,
-    QMouseEvent,
-    QPalette, 
-    QColor,
-    QGuiApplication
-    )
+
+# Сторонние библиотеки
+from sympy import ln, log, sin, cos, pi, tan, cot
+from PySide6.QtCore import Qt, QEvent, QSize
+from PySide6.QtGui import QKeyEvent, QMouseEvent, QPalette, QColor, QGuiApplication
 from PySide6.QtWidgets import (
     QApplication,
     QLabel,
